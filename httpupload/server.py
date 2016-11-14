@@ -141,10 +141,11 @@ class MissingComponent(ComponentXMPP):
             path = os.path.join(sender_hash, folder)
             if sane_filename:
                 path = os.path.join(path, sane_filename)
-            if os.name == 'nt':
-                path = normalize_path(path, config['get_sub_url_len'])
             with files_lock:
                 files.add(path)
+            if os.name == 'nt':
+                files.add(os.path.normcase(path))
+                path = path.replace('\\', '/')
             print(path)
             reply = iq.reply()
             reply['slot']['get'] = urllib.parse.urljoin(config['get_url'], path)
