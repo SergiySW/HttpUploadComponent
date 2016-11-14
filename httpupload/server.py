@@ -141,6 +141,8 @@ class MissingComponent(ComponentXMPP):
             path = os.path.join(sender_hash, folder)
             if sane_filename:
                 path = os.path.join(path, sane_filename)
+            if os.name == 'nt':
+                path = normalize_path(path, config['get_sub_url_len'])
             with files_lock:
                 files.add(path)
             print(path)
@@ -203,6 +205,8 @@ class HttpHandler(BaseHTTPRequestHandler):
         global config
         path = normalize_path(self.path, config['get_sub_url_len'])
         slashcount = path.count('/')
+        if os.name == 'nt':
+            slashcount = path.count('\\')
         if path[0] in ('/', '\\') or slashcount < 1 or slashcount > 2:
             self.send_response(404,'file not found')
             self.end_headers()
