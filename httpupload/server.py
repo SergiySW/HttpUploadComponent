@@ -310,7 +310,9 @@ if __name__ == "__main__":
         kill_event.set()
         sys.exit(1)
 
-    if 'http_keyfile' in config and 'http_certfile' in config:
+    if 'http_keyfile' in config and 'http_certfile' in config and 'ciphers' in config:
+        server.socket = ssl.wrap_socket(server.socket, keyfile=config['http_keyfile'], certfile=config['http_certfile'], ciphers=config['ciphers'])
+    elif 'http_keyfile' in config and 'http_certfile' in config:
         server.socket = ssl.wrap_socket(server.socket, keyfile=config['http_keyfile'], certfile=config['http_certfile'])
     jid = config['component_jid']
     secret = config['component_secret']
