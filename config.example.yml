@@ -14,7 +14,7 @@ http_address: 127.0.0.1 #use 0.0.0.0 if you don't want to use a proxy
 http_port: 8080
 #http_keyfile: /etc/ssl/private/your.key
 #http_certfile: /etc/ssl/certs/your.crt
-#ciphers: EECDH+AESGCM:EDH+AESGCM:!DSS: #is not supported in Windows XP, Andoid < 4.4 
+#ciphers: EECDH+AESGCM:EDH+AESGCM:!DSS: # if you don't use proxy. Sample set of ciphers is not supported in Windows XP, Andoid < 4.4 
 
 get_url : http://upload.yoursite.tld:8080
 put_url : http://upload.yoursite.tld:8080
